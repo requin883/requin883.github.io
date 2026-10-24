@@ -1,4 +1,4 @@
-import "./index.css";
+import "./App.css";
 import React from "react";
 
 const projects = [
@@ -12,7 +12,7 @@ const projects = [
       { name: "Sass", percent: "28.9%", dot: "sass" },
       { name: "HTML", percent: "0.3%", dot: "html" }
     ],
-    link: "https://github.com/requin883/s5-14-m-mern"
+    link: "https://ludens-two.vercel.app/notifications"
   },
   {
     badge: "Node + React",
@@ -24,7 +24,7 @@ const projects = [
       { name: "JavaScript", percent: "27.5%", dot: "js" },
       { name: "Other", percent: "1.3%", dot: "other" }
     ],
-    link: "https://github.com/No-Country-simulation/s17-05-m-node-react"
+    link: "https://s17-05-m-node-react.onrender.com/"
   }
 ];
 
@@ -185,7 +185,7 @@ function App() {
 
           <div className="contact-card">
             <p>I’m open to freelance work, collaborations, and opportunities to build great products.</p>
-            <a href="mailto:hello@requin883.dev" className="btn btn-primary">hello@requin883.dev</a>
+            <a href="mailto:requin883@gmail.com" className="btn btn-primary">requin883@gmail.com</a>
           </div>
         </section>
       </main>
@@ -204,6 +204,30 @@ function ThemeToggle() {
     const saved = localStorage.getItem("portfolio-theme");
     return saved === "light";
   });
+
+  React.useEffect(() => {
+    const revealItems = document.querySelectorAll(".reveal");
+
+    if (!revealItems.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+      }
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+
+    return () => observer.disconnect();
+  }, []);
 
   React.useEffect(() => {
     document.body.classList.toggle("light", lightMode);
